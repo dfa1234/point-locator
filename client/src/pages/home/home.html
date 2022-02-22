@@ -1,0 +1,135 @@
+<header>
+  <!--button>
+    <ion-icon name="menu"></ion-icon>
+  </button-->
+  <button>
+    <ion-icon name="search" (click)="toogleSearch();"></ion-icon>
+  </button>
+  <button *ngIf="display !== DISPLAY_TYPE.LIST"  (click)="display = DISPLAY_TYPE.LIST">
+    <ion-icon name="list" ></ion-icon>
+  </button>
+  <button *ngIf="display !== DISPLAY_TYPE.MAP"  (click)="display = DISPLAY_TYPE.MAP">
+    <ion-icon name="locate" ></ion-icon>
+  </button>
+  <button  *ngIf="display !== DISPLAY_TYPE.USER" (click)="display = DISPLAY_TYPE.USER">
+    <ion-icon name="person"></ion-icon>
+  </button>
+</header>
+
+<main>
+
+  <section *ngIf="display === DISPLAY_TYPE.LIST" style="overflow-y: scroll;">
+    <px-marker *ngFor="let ep of eatPoints" [eatPoint]="ep" [origin]="me"></px-marker>
+  </section>
+
+
+  <section *ngIf="display === DISPLAY_TYPE.MAP">
+
+    <agm-map
+      [latitude]="center.latitude"
+      [longitude]="center.longitude"
+      [zoom]="center.zoom"
+      (mapClick)="mapClick($event)"
+      (mapReady)="mapReady($event)"
+      (centerChange)="centerChange($event)"
+      (boundsChange)="boundsChange($event)"
+      (getNorthEast)="getNorthEast($event)"
+      (getNorthWest)="getNorthWest($event)"
+      (getSouthEast)="getSouthEast($event)"
+      (getSouthWest)="getSouthWest($event)"
+      (zoomChange)="mapClick($event)">
+
+      <ng-container *ngFor="let ep of eatPoints">
+
+        <agm-marker *ngIf="ep && ep.typeEP && epTypeFlip[ep.typeEP]"
+                    [latitude]="ep.address.lat"
+                    [longitude]="ep.address.lon"
+                    [label]="ep.name"
+                    [iconUrl]="ep.typeEP && {url:'assets/imgs/icons/'+epTypeFlip[ep.typeEP].toLowerCase()+'-1.png',scaledSize: {height: 62,width: 45}}"
+                    [markerDraggable]="false">
+          <agm-info-window>
+
+            <px-marker [eatPoint]="ep" [origin]="me"></px-marker>
+
+          </agm-info-window>
+        </agm-marker>
+      </ng-container>
+
+
+    </agm-map>
+
+  </section>
+
+
+  <section *ngIf="display === DISPLAY_TYPE.USER" class="duser">
+
+    <button class="duser__edit" (click)="editUser()">
+      Modifier
+    </button>
+
+    <button class="duser__logout" (click)="logout()">
+      Logout
+    </button>
+
+    <div class="duser__avatar">
+      <ion-icon name="contact"></ion-icon>
+    </div>
+
+    <div class="duser__name">
+      Bonjour {{me.name}}
+    </div>
+
+    <div class="duser__tabs-btn">
+      <button>
+        Mes Eatpoints
+      </button>
+      <!--button>
+        Mes Favoris
+      </button-->
+    </div>
+
+    <div class="duser__eps-list">
+      <px-marker *ngFor="let ep of eatPointPersonnalList" [eatPoint]="ep" [origin]="me">
+        <button (click)="deleteEP(ep)" class="light-btn rm-btn"><ion-icon name="close"></ion-icon></button>
+      </px-marker>
+    </div>
+
+  </section>
+
+
+</main>
+
+
+<!--button ion-fab color="light" class="refresh-btn" (click)="refreshEp()"><ion-icon name="refresh-circle"></ion-icon></button-->
+<button ion-fab color="primary" class="locate-btn" (click)="geolocalizeMe()" *ngIf="display !== DISPLAY_TYPE.USER"><ion-icon name="locate"></ion-icon></button>
+
+<button ion-fab color="primary" class="add-btn" (click)="addEp()" *ngIf="display !== DISPLAY_TYPE.USER"><ion-icon name="add"></ion-icon></button>
+
+<button class="light-btn cancel-search-btn" (click)="cancelSpecialSearch()" *ngIf="specialSearch && (specialSearch.name || specialSearch.type)">
+  Annuler recherche
+  <ng-container *ngIf="specialSearch.name">"{{specialSearch.name}}"</ng-container>
+  <ng-container *ngIf="specialSearch.type">"{{specialSearch.type}}"</ng-container>
+</button>
+<!--agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map-->
+
+<!--div class="searchBar">
+  <ion-searchbar (ionInput)="searchList($event)" placeholder="Recherche nom ou ville..."></ion-searchbar>
+</div-->
+
+<!--div style="text-align: center;">
+ <button style="margin: 5px" class="light-button"
+         (click)="center=CENTER_PARIS">
+   <ion-icon name="locate"></ion-icon>&nbsp;Carte Région parisienne
+ </button>
+ <br>
+ <button style="margin: 5px" class="light-button"
+         (click)="center=CENTER_FRANCE">
+   <ion-icon name="locate"></ion-icon>&nbsp;Carte France
+ </button>
+ <button style="margin: 5px" class="light-button"
+         (click)="centerOnMe()">
+   <ion-icon name="locate"></ion-icon>&nbsp;Ma position
+ </button>
+</div-->

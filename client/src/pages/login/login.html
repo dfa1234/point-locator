@@ -1,0 +1,119 @@
+<div class="background"></div>
+
+<div class="content">
+  <img src="assets/imgs/logo.png" alt="Logo" />
+
+  <div *ngIf="currentStep==STEP_LOGIN.CONNECTION" [@simpleFadeAnimation]="'in'">
+    <p>
+      Du producteur au consommateur, l'application qui permet de localiser les
+      produits à la source.
+    </p>
+    <button (click)="currentStep=STEP_LOGIN.LOGIN">
+      Trouvez/Partagez des Eatpoints
+    </button>
+  </div>
+
+  <form
+    *ngIf="currentStep==STEP_LOGIN.LOGIN"
+    [@simpleFadeAnimation]="'in'"
+    (ngSubmit)="$event.preventDefault();login()"
+  >
+    <input
+      type="email"
+      placeholder="Login"
+      [(ngModel)]="credentials.email"
+      name="login"
+    />
+    <input
+      type="password"
+      placeholder="Mot de passe"
+      [(ngModel)]="credentials.password"
+      name="password"
+    />
+    <button type="submit">Connection</button>
+    <b class="forget-pass" (click)="currentStep=STEP_LOGIN.FORGOT_PASSWORD">
+      {{ 'FORGET_PASSWORD' | translate }}
+    </b>
+
+    <div class="connect-btns">
+      <!--button class="google" (click)="$event.preventDefault();connectWithGoogle()"><ion-icon name="logo-google"></ion-icon> Connexion Google</button-->
+      <button
+        class="facebook"
+        (click)="$event.preventDefault();connectWithFacebook()"
+      >
+        <ion-icon name="logo-facebook"></ion-icon> Connexion Facebook
+      </button>
+      <button
+        class="inscription"
+        (click)="$event.preventDefault();currentStep=STEP_LOGIN.REGISTER_ACCOUNT"
+      >
+        <ion-icon name="person-add"></ion-icon> S'inscrire
+      </button>
+      <button
+        class="guest"
+        (click)="$event.preventDefault();connectAnonymous()"
+      >
+        <ion-icon name="glasses"></ion-icon> Connexion anonyme
+      </button>
+    </div>
+  </form>
+
+  <form
+    *ngIf="currentStep==STEP_LOGIN.REGISTER_ACCOUNT && user"
+    [@simpleFadeAnimation]="'in'"
+    (ngSubmit)="$event.preventDefault();registerToService(user)"
+  >
+    <span class="instruction"
+      >Votre email servira de login pour vous connecter (il sera caché aux
+      autres):</span
+    >
+    <input
+      type="email"
+      placeholder="Email"
+      [(ngModel)]="user.email"
+      name="email"
+    />
+    <input type="text" placeholder="Nom" [(ngModel)]="user.name" name="name" />
+    <input
+      type="password"
+      placeholder="Votre mot de passe"
+      [(ngModel)]="user.password"
+      name="password"
+    />
+    <input
+      type="password"
+      placeholder="Verification mot de passe"
+      [(ngModel)]="password2"
+      name="password2"
+    />
+    <button type="submit">S'inscrire</button>
+    <b class="forget-pass" (click)="openTerms()"
+      >Voir les conditions d'utilisation</b
+    >
+    <button
+      class="cancel-btn"
+      (click)="$event.preventDefault();currentStep=STEP_LOGIN.LOGIN"
+    >
+      Annuler
+    </button>
+  </form>
+
+  <form
+    *ngIf="currentStep==STEP_LOGIN.FORGOT_PASSWORD"
+    [@simpleFadeAnimation]="'in'"
+  >
+    <p>Veuillez entrer votre email pour recevoir votre mot de passe:</p>
+    <input type="text" placeholder="Email" [(ngModel)]="email" name="email" />
+    <div class="btns-forgot">
+      <button
+        class="cancel-btn"
+        (click)="$event.preventDefault();currentStep=STEP_LOGIN.LOGIN"
+      >
+        Annuler
+      </button>
+      <button type="submit" (click)="$event.preventDefault();forgotPass()">
+        Envoyer
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,120 @@
+px-search {
+
+
+
+  .search-overlay {
+
+    //transform: translateY(-100vh);
+    transition: .5s ease-in;
+
+    background: rgba(black, .8);
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+
+    .search-input {
+      position: relative;
+      margin: 5px 15% 20px 15%;
+
+      input {
+        background: gray;
+        color: white;
+        width: 100%;
+        display: block;
+        padding: 5px 30px;
+        border-radius: 12px;
+        margin: auto;
+      }
+
+      ion-icon:first-child {
+        position: absolute;
+        left: 5px;
+        top: 0;
+        color: white;
+        font-size: 20px;
+        padding: 5px;
+      }
+
+
+      ion-icon:last-child {
+        position: absolute;
+        right: 5px;
+        top: 0;
+        color: #171717;
+        font-size: 20px;
+        padding: 5px;
+      }
+    }
+
+
+    label[for="search"]{
+      color: white;
+      display: block;
+      margin-left: 23%;
+      font-size: 15px;
+      padding-top: 14px;
+    }
+
+
+    .select-search-wrapper{
+      width: 100%;
+      overflow-y: scroll;
+      max-height: 150px;
+    }
+
+    .select-search {
+      background: rgba(255, 255, 255, 0.18);
+      /* background-color: white; */
+      width: 2000px;
+      max-width: unset;
+      padding: 16px;
+      display: flex;
+      justify-content: space-around;
+      max-height: 150px;
+
+      button {
+        background: transparent;
+
+        img {
+          min-width: 80px;
+          height: auto;
+          max-height: 115px;
+        }
+      }
+    }
+
+    .search-btn{
+      font-size: 18px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+  }
+
+  .typeep{
+    color: white;
+    font-size: 22px;
+    display: block;
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+    font-family: Roboto,sans-serif;
+  }
+
+  .active{
+    transform: scale(1.2);
+  }
+
+  .cancel-btn{
+    background: transparent !important;
+    margin: auto;
+    font-size: 15px !important;
+    color:white;
+    display: block;
+    text-align: center;
+  }
+
+}

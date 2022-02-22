@@ -1,0 +1,87 @@
+<header>
+
+  <h1>Détails EatPoint</h1>
+
+  <button class="btn-close-modal" (click)="dismiss()"><ion-icon name="close"></ion-icon></button>
+
+</header>
+
+
+<main>
+
+  <div class="slide-imgs">
+
+    <button>
+      <ion-icon name="arrow-dropleft"></ion-icon>
+    </button>
+
+    <div class="img-wrp" *ngFor="let image of eatPoint.images">
+      <img [src]="image.url.includes('http')? image.url: APP_CONFIG.baseUrl + '/images/' +image.url" alt="">
+    </div>
+
+    <button>
+      <ion-icon name="arrow-dropright"></ion-icon>
+    </button>
+
+  </div>
+
+  <h1 class="name">{{eatPoint.name}}</h1>
+
+  <h2 class="slogan">{{eatPoint.slogan}}</h2>
+
+  <img class="img-type" *ngIf="epTypeKey" src="assets/imgs/icons/{{epTypeKey.toLowerCase()}}-1.png" alt="" >
+
+  <div  class="address">{{Address.formatToString(eatPoint.address)}}</div>
+
+  <div class="contact-block">
+
+    <div>
+      Horaires:<br>
+      {{eatPoint.openingHours.toString()}}
+    </div>
+
+    <hr/>
+
+    <div>
+      Coordonées:<br>
+      {{eatPoint.phone}}<br>
+      {{eatPoint.email}}<br>
+    </div>
+  </div>
+
+  <button class="btn-products">Voir Produits</button>
+
+  <span class="text-share">Partagez avec vos amis</span>
+
+  <div class="btns-share">
+    <button><ion-icon name="logo-twitter"></ion-icon></button>
+
+    <button><ion-icon name="logo-facebook"></ion-icon></button>
+
+    <button><ion-icon name="logo-instagram"></ion-icon></button>
+  </div>
+
+
+  <div class="rating-block">
+    <ionic3-star-rating
+      activeIcon = "ios-star"
+      defaultIcon = "ios-star-outline"
+      activeColor = "#488aff"
+      defaultColor = "#f4f4f4"
+      readonly="false"
+      [rating]="3">
+    </ionic3-star-rating>
+  </div>
+
+
+  <div class="comments-block">
+    <textarea placeholder="Laisser un commentaire..."></textarea>
+    <button>Envoyer</button>
+  </div>
+
+
+  <div>
+
+  </div>
+
+</main>

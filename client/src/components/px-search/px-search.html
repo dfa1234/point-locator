@@ -1,0 +1,26 @@
+
+<div class="search-overlay" [style.transform]="searchOpened ? 'translateY(0)' : 'translateY(-100vh)'"
+     [style.display]="searchOpened ? 'block' : 'none'">
+
+  <label for="search">Recherche:</label>
+  <div class="search-input">
+    <ion-icon name="search"></ion-icon>
+    <input type="text" name="search" id="search" [(ngModel)]="searchParams.name"/>
+    <ion-icon name="close-circle"></ion-icon>
+  </div>
+
+
+  <div class="select-search-wrapper">
+    <div class="select-search">
+      <button *ngFor="let epType of epTypeKeys" [ngClass]="{active:searchParams && searchParams.type===EP_TYPES[epType]}"><img src="assets/imgs/icons/{{epType.toLowerCase()}}-1.png" alt="" (click)="searchParams.type = EP_TYPES[epType];"></button>
+    </div>
+  </div>
+
+  <span class="typeep" *ngIf="searchParams.type">{{searchParams.type}}</span>
+
+  <button class="primary-btn-large search-btn" (click)="launchSearch()">Lancer la recherche</button>
+
+  <button class="cancel-btn" (click)="dismiss()">Annuler</button>
+
+</div>
+

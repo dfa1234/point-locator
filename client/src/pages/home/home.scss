@@ -1,0 +1,149 @@
+page-home {
+
+
+  header {
+    button {
+      padding: 5px;
+      background: transparent;
+
+      ion-icon {
+        color: #fbfbfb;
+        font-size: 32px;
+      }
+    }
+
+    background: #24282b;
+    height: 50px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+
+  main {
+    height: calc(100% - 50px)
+  }
+
+  section {
+    width: 100%;
+    height: 100%;
+    background: white;
+    position: relative;
+  }
+
+  agm-map {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .add-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 70px;
+  }
+
+  .locate-btn{
+    position: absolute;
+    bottom: 87px;
+    right: 70px;
+  }
+
+  .refresh-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 70px;
+  }
+
+
+  .duser {
+
+    padding-top: 40px;
+    overflow-y: scroll;
+
+
+    &__edit {
+      @extend .secondary-btn;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    &__logout {
+      @extend .secondary-btn;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+
+    &__avatar {
+
+      margin: auto;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      text-align: center;
+
+      ion-icon {
+        font-size: 110px;
+        color: white;
+      }
+
+      background: map_get($colors, primary);
+    }
+
+    &__name {
+      display: block;
+      margin: auto;
+      text-align: center;
+      padding-top: 5px;
+    }
+
+    &__tabs-btn {
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      button {
+        @extend .light-btn;
+      }
+    }
+
+    &__eps-list {
+      margin-top: 10px;
+      border-top: 1px solid lightgray;
+      min-height: 500px;
+
+      px-marker {
+        width: 100%;
+      }
+    }
+
+  }
+
+
+  .agm-info-window-content > px-marker > div {
+    border: none !important;
+  }
+
+
+  .rm-btn{
+    width: 30px;
+    height: 30px;
+    margin: 0 5px 0 auto;
+    border-radius: 50%;
+  }
+
+
+  .cancel-search-btn{
+    position: absolute;
+    bottom: 70px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 230px;
+    padding: 16px 20px;
+    background: whitesmoke;
+  }
+}

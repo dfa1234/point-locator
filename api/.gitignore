@@ -1,0 +1,16 @@
+node_modules
+*.log
+*.txt
+*.out
+.DS_Store
+.idea
+.idea/
+logs/
+config.ts
+tls/*.pem
+dumps/
+cache/
+cache.tar.*
+
+images/*
+release/

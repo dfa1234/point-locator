@@ -1,0 +1,22 @@
+<div class="eatpoint">
+  <div class="eatpoint__img">
+    <img  [src]="eatPoint.images[0].url.includes('http')? eatPoint.images[0].url: APP_CONFIG.baseUrl + '/images/' +eatPoint.images[0].url"
+          alt="" *ngIf="eatPoint.images && eatPoint.images.length">
+    <img *ngIf="(!eatPoint.images || !eatPoint.images.length) && getNameType(eatPoint)" src="assets/imgs/icons/{{getNameType(eatPoint)}}-1.png" alt="" >
+  </div>
+  <div class="eatpoint__details">
+    <span class="eatpoint__name">{{eatPoint.name}}</span>
+    <br>
+    <span class="eatpoint__slogan">{{eatPoint.slogan}}</span>
+    <br>
+    <span class="eatpoint_distance" *ngIf="eatPoint.typeItem===OBJ_TYPE.EATPOINT">Distance: {{distance(eatPoint,me)}} km</span>
+    <br>
+    <button class="eatpoint__btn-details" *ngIf="eatPoint.typeItem===OBJ_TYPE.EATPOINT" (click)="selectDetails(eatPoint)">
+      Details
+    </button>
+    <!--button class="eatpoint__btn-details-products" *ngIf="eatPoint.typeItem===OBJ_TYPE.EATPOINT" (click)="selectProduct(eatPoint)">
+      Produits
+    </button-->
+  </div>
+  <ng-content></ng-content>
+</div>

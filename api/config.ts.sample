@@ -1,0 +1,11 @@
+export const serverConf = {
+    port:3113,
+    portSSL : 3114,
+};
+
+export const dbConf = {
+    URI:'mongodb://localhost:27017/',
+    user: 'user',
+    password: 'password',
+    database : 'PointLocator',
+};

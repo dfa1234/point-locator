@@ -1,0 +1,112 @@
+<ion-header xmlns="http://www.w3.org/1999/html">
+
+  <ion-navbar>
+    <ion-title>Ajouter un EatPoint</ion-title>
+    <button class="btn-close-modal" (click)="dismiss()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form class="add-ep-section-1" *ngIf="currentStep === E_EDIT_EP_STEPS.FORM1">
+
+    <button pxImportPicture (result)="uploadPicture($event)" class="take-picture">
+      <ion-icon name="camera"></ion-icon>
+    </button>
+
+    <div class="ep-imgs">
+      <div class="img-wrp" *ngFor="let image of eatPoint.images">
+        <img [src]="image.url.includes('http')? image.url: APP_CONFIG.baseUrl + '/images/' +image.url" alt="">
+      </div>
+    </div>
+
+    <input type="text" placeholder="Nom du EatPoint*" [(ngModel)]="eatPoint.name" name="eatPoint.name"/>
+
+    <input type="text" placeholder="Slogan" [(ngModel)]="eatPoint.slogan" name="eatPoint.slogan"/>
+
+    <label>Type de EatPoint</label>
+    <!-- //TODO Eatpoint name type -->
+    <div class="select-type-wrapper">
+      <div class="select-type">
+        <button *ngFor="let epType of epTypeKeys" [ngClass]="{active:eatPoint.typeEP===EP_TYPES[epType]}"><img src="assets/imgs/icons/{{epType.toLowerCase()}}-1.png" alt="" (click)="eatPoint.typeEP = EP_TYPES[epType];"></button>
+      </div>
+    </div>
+
+    <span class="typeep" *ngIf="eatPoint.typeEP"> {{eatPoint.typeEP}}</span>
+
+    <button class="secondary-btn local-btn" (click)="localUser($event)">
+      <ion-icon name="navigate"></ion-icon>
+      Localiser
+    </button>
+
+    <div class="row">
+      <input type="text" placeholder="Latitude" [(ngModel)]="eatPoint.address.lat" name="address.lat">
+      <input type="text" placeholder="Longitude" [(ngModel)]="eatPoint.address.lon" name="address.lon">
+    </div>
+
+    <label>Coordonnées</label>
+
+    <input type="text" placeholder="Email" [(ngModel)]="eatPoint.email" name="email"/>
+
+    <input type="text" placeholder="Telephone" [(ngModel)]="eatPoint.phone" name="phone"/>
+
+    <input type="text" placeholder="Adresse" [(ngModel)]="eatPoint.address.name" name="address.name"/>
+
+    <div class="row">
+      <input type="text" placeholder="Ville" [(ngModel)]="eatPoint.address.city" name="address.city"/>
+      <input type="text" placeholder="Code postal" [(ngModel)]="eatPoint.address.zipCode" name="address.zipCode"/>
+    </div>
+
+    <button class="save-btn" (click)="endStep1()">Continuer</button>
+  </form>
+
+
+  <form class="add-ep-section-1" *ngIf="currentStep === E_EDIT_EP_STEPS.FORM2">
+
+    <div *ngFor="let day of days;let i=index">
+      <label>{{day}}</label>
+      <span *ngIf="eatPoint.openingHours[i]!==null">Ouvert</span>
+      <span *ngIf="eatPoint.openingHours[i]===null">Fermé</span>
+      <ion-checkbox [checked]="eatPoint.openingHours[i]!==null" (ionChange)="openHoursFor(i)"></ion-checkbox>
+      <input *ngIf="eatPoint.openingHours[i]!==null" type="text" placeholder="Horaires ouvertures" [(ngModel)]="eatPoint.openingHours[i]" name="eatPoint.openingHours.{{i}}">
+    </div>
+
+    <button class="save-btn" (click)="endStep2()">Continuer</button>
+
+  </form>
+
+
+  <form class="add-ep-section-1" *ngIf="currentStep === E_EDIT_EP_STEPS.FORM3">
+
+    <h3>Produits disponibles au Eatpoint</h3>
+
+    <button pxImportPicture (result)="uploadPictureProduct($event,currentProduct)" class="take-picture">
+      <ion-icon name="camera"></ion-icon>
+    </button>
+
+    <input type="text" placeholder="Nom du Produit*" [(ngModel)]="currentProduct.name" name="currentProduct.name"/>
+
+    <input type="text" placeholder="Prix" [(ngModel)]="currentProduct.price" name="currentProduct.price"/>
+
+    <textarea placeholder="Description" [(ngModel)]="currentProduct.description" name="currentProduct.description"> </textarea>
+
+    <div>
+      <div *ngFor="let product of eatPoint.products" class="result-products">
+        <div class="result-products__img-wrapper">
+          <img *ngIf="product.image" [src]="product.image.url.includes('http')? product.image.url: APP_CONFIG.baseUrl + '/images/' + product.image.url" alt="">
+        </div>
+        <span class="result-products__name">{{product.name}}</span>
+        <span class="result-products__remove" (click)="removeProduct(product)" *ngIf="eatPoint.products.length > 1 && product !==currentProduct"><ion-icon name="remove-circle"></ion-icon></span>
+      </div>
+    </div>
+
+    <button (click)="addProduct()" class="add-product"> <ion-icon name="add-circle"></ion-icon>Ajouter un nouveau produit</button>
+
+    <button class="save-btn" (click)="endStep3()">Terminer</button>
+  </form>
+
+</ion-content>

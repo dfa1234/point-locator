@@ -1,0 +1,63 @@
+px-marker {
+  //display: flex;
+  //justify-content: space-between;
+  height: 100px;
+  width: 200px;
+  //align-items: center;
+
+
+
+  .eatpoint{
+
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    padding: 10px;
+    &__img{
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img{
+        width: auto;
+        height: auto;
+        max-height: 100px;
+        max-width: 100px;
+      }
+
+    }
+
+
+    &__details{
+      font-family: "Roboto", "Helvetica Neue", sans-serif;
+      color:#333;
+      margin-left: 5px;
+      width: 150px;
+      flex-basis: 150px;
+      flex-direction: column;
+      align-items: start;
+      justify-content: start;
+    }
+
+    &__btn-details{
+      @extend .primary-btn;
+      margin: 5px 5px 5px 0;
+    }
+
+    &__btn-details-products{
+      @extend .secondary-btn;
+      margin: 5px 5px 5px 0px;
+    }
+
+
+  }
+
+
+
+
+
+}
+
+
+

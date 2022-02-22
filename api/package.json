@@ -1,0 +1,41 @@
+{
+  "name": "PointLocator-api",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "watch": "./node_modules/.bin/nodemon --watch . --exec ./node_modules/.bin/ts-node index.ts",
+    "ts-node": "./node_modules/.bin/ts-node index.ts",
+    "start": "echo 'open chrome://inspect/#devices in chrome' && ./node_modules/.bin/nodemon --watch . --exec node --inspect --require ts-node/register index.ts",
+    "test": "./node_modules/.bin/mocha -r ts-node/register **/*.spec.ts --exit  --timeout 8000"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "googleapis": "^34.0.0",
+    "moment": "^2.23.0",
+    "mongodb": "^3.0.2",
+    "mongoose": "^5.0.9",
+    "morgan": "^1.9.0",
+    "reflect-metadata": "^0.1.10",
+    "request": "^2.83.0",
+    "rxjs": "^5.5.6",
+    "ssl-root-cas": "^1.2.5",
+    "typegoose": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.11.1",
+    "@types/mongodb": "^3.0.5",
+    "@types/mongoose": "^5.0.6",
+    "@types/request": "^2.0.9",
+    "mocha": "^5.2.0",
+    "node-gyp": "^3.7.0",
+    "nodemon": "^1.17.1",
+    "ts-node": "^5.0.0",
+    "tslint": "^5.9.1",
+    "tslint-config-airbnb": "^5.8.0",
+    "typescript": "^2.6.2"
+  }
+}
